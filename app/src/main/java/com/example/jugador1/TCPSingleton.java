@@ -1,5 +1,9 @@
 package com.example.jugador1;
 
+import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -9,7 +13,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-public class TCPSingleton extends Thread{
+public class TCPSingleton extends Thread {
 
     private static TCPSingleton unico;
 
@@ -34,9 +38,10 @@ public class TCPSingleton extends Thread{
 
     public void run() {
 
-            System.out.println("Waiting server...");
+            Log.e(">>", "Waiting server");
         try {
-            cliente = new Socket("10.0.2.2",5000);
+
+            cliente = new Socket("192.168.1.10",5000);
             System.out.println("Successfully connected");
 
             InputStream is = cliente.getInputStream();
@@ -47,8 +52,9 @@ public class TCPSingleton extends Thread{
 
             while(true) {
                 String linea = reader.readLine();
-                System.out.println(linea);
+                //System.out.println(linea);
                 observer.onMessage(linea);
+                Log.e(">>>", linea);
             }
         } catch (IOException e) {
             e.printStackTrace();
