@@ -2,8 +2,6 @@ package com.example.jugador1;
 
 import android.util.Log;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -13,7 +11,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-public class TCPSingleton extends Thread {
+public class TCPSingleton extends Thread{
 
     private static TCPSingleton unico;
 
@@ -38,11 +36,16 @@ public class TCPSingleton extends Thread {
 
     public void run() {
 
-            Log.e(">>", "Waiting server");
+            Log.e("--->","Waiting server...");
         try {
 
-            cliente = new Socket("192.168.1.10",5000);
-            System.out.println("Successfully connected");
+            //cliente = new Socket("10.0.2.2",5000);
+            //el de bermi
+            //cliente = new Socket("192.168.1.10",5000);
+            //el de Laura
+            cliente = new Socket("192.168.0.3",5000);
+
+            Log.e("--->","Successfully connected");
 
             InputStream is = cliente.getInputStream();
             reader = new BufferedReader(new InputStreamReader(is));
@@ -52,9 +55,9 @@ public class TCPSingleton extends Thread {
 
             while(true) {
                 String linea = reader.readLine();
-                //System.out.println(linea);
+                Log.e("--",linea);
                 observer.onMessage(linea);
-                Log.e(">>>", linea);
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -68,7 +71,7 @@ public class TCPSingleton extends Thread {
                         writer.write(msg+"\n");
                         writer.flush();
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
+
                         e.printStackTrace();
                     }
                 }
