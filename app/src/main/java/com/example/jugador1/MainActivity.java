@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 
 import com.google.gson.Gson;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, onMessageListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, onMessageListener,View.OnTouchListener{
 
     private Button shoot;
     private Button right;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int x;
     private int y;
     public String dirIP;
+    public boolean presionado;
 
     public String getDirIP() {
         return dirIP;
@@ -47,15 +49,96 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         x = 0;
         y = 0;
 
+
         //clicks
+        /*
         shoot.setOnClickListener(this);
         right.setOnClickListener(this);
         up.setOnClickListener(this);
         down.setOnClickListener(this);
         left.setOnClickListener(this);
 
+         */
+
+
+        shoot.setOnClickListener(this);
+        //clicks ontouch
+        right.setOnTouchListener(this);
+        up.setOnTouchListener(this);
+        down.setOnTouchListener(this);
+        left.setOnTouchListener(this);
+
     }
 
+//movimeinto con ontouch
+public boolean onTouch(View view, MotionEvent event) {
+switch (event.getAction()){
+    case MotionEvent.ACTION_DOWN:
+        presionado = true;
+        break;
+    case MotionEvent.ACTION_UP:
+        presionado = false;
+        break;
+}
+if(presionado == true){
+    new Thread(
+            ()->{
+                while(presionado){
+                    switch (view.getId()){
+                        case R.id.right:
+                            Log.e(">>", "right");
+                            x += 10;
+                            break;
+                        case R.id.up:
+                            Log.e("^^", "up");
+                            y -= 10;
+                            break;
+                        case R.id.down:
+                            Log.e("ll", "down");
+                            y += 10;
+                            break;
+                        case R.id.left:
+                            Log.e("<<", "left");
+                            x -= 10;
+                            break;
+
+                    }
+                    Coordenada coor = new Coordenada(x,y);
+                    Gson gson = new Gson();
+                    String json = gson.toJson(coor);
+                    tcp.sendMessage(json);
+
+                    try{
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+    ).start();
+}
+
+    return false;
+}
+
+    //movimiento con onclic
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.shoot:
+                Log.e("--", "shoot");
+                Disparo disparo = new Disparo(5, x, y);
+                break;
+        }
+        Coordenada coor = new Coordenada(x,y);
+        Gson gson = new Gson();
+        String json = gson.toJson(coor);
+        tcp.sendMessage(json);
+
+    }
+/*
+    //movimiento con onclic
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -88,7 +171,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Gson gson = new Gson();
         String json = gson.toJson(coor);
         tcp.sendMessage(json);
+
     }
+
+ */
+
+
 
     @Override
     public void onMessage(String msg) {
