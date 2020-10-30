@@ -24,7 +24,7 @@ public class ingresar_ip extends AppCompatActivity {
 
         jugar.setOnClickListener(
                 (view)->{
-                    String ip = jugar.getText().toString();
+                    String ip = dirIP.getText().toString();
                     SharedPreferences preferences = getSharedPreferences("ip", MODE_PRIVATE);
                     preferences.edit().putString("dirIP", ip).apply();
                     Intent a = new Intent(this, MainActivity.class);

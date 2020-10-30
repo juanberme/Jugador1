@@ -24,28 +24,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public String dirIP;
     public boolean presionado;
 
-    public String getDirIP() {
-        return dirIP;
-    }
 
-    public void setDirIP(String dirIP) {
-        this.dirIP = dirIP;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        tcp = TCPSingleton.getInstance();
         dirIP = getSharedPreferences("ip", MODE_PRIVATE).getString("dirIP", "NO_IP");
-
+        tcp.setDirIP(dirIP);
+        tcp.start();
         //referencias
         shoot = findViewById(R.id.shoot);
         right = findViewById(R.id.right);
         up = findViewById(R.id.up);
         down = findViewById(R.id.down);
         left = findViewById(R.id.left);
-        tcp = TCPSingleton.getInstance();
+
         x = 0;
         y = 0;
 

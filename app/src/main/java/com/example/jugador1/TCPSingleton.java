@@ -14,11 +14,12 @@ import java.net.Socket;
 public class TCPSingleton extends Thread{
 
     private static TCPSingleton unico;
+    private String dirIP;
 
     public static TCPSingleton getInstance() {
         if(unico == null) {
             unico = new TCPSingleton();
-            unico.start();
+
         }
         return unico;
     }
@@ -29,6 +30,7 @@ public class TCPSingleton extends Thread{
     private BufferedReader reader;
     private BufferedWriter writer;
     private onMessageListener observer;
+    private String ip;
 
     public void setObserver(onMessageListener observer) {
         this.observer = observer;
@@ -43,7 +45,7 @@ public class TCPSingleton extends Thread{
             //el de bermi
             //cliente = new Socket("192.168.1.10",5000);
             //el de Laura
-            cliente = new Socket("192.168.0.3",5000);
+            cliente = new Socket(dirIP,5000);
 
             Log.e("--->","Successfully connected");
 
@@ -78,4 +80,11 @@ public class TCPSingleton extends Thread{
         ).start();
     }
 
+    public String getDirIP() {
+        return dirIP;
+    }
+
+    public void setDirIP(String dirIP) {
+        this.dirIP = dirIP;
+    }
 }
