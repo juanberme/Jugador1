@@ -4,63 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/control"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/right"
         android:layout_width="83dp"
         android:layout_height="77dp"
-        android:text="right"
+        android:background="@drawable/aflecha"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.573" />
+        app:layout_constraintVertical_bias="0.357" />
 
     <Button
         android:id="@+id/down"
         android:layout_width="83dp"
         android:layout_height="77dp"
-        android:text="down"
+        android:background="@drawable/iflecha"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.81"
+        app:layout_constraintHorizontal_bias="0.195"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.717" />
+        app:layout_constraintVertical_bias="0.229" />
 
     <Button
         android:id="@+id/up"
         android:layout_width="83dp"
         android:layout_height="77dp"
-        android:text="up"
+        android:background="@drawable/dflecha"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.179"
+        app:layout_constraintHorizontal_bias="0.801"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.717" />
+        app:layout_constraintVertical_bias="0.23" />
 
     <Button
         android:id="@+id/left"
         android:layout_width="84dp"
         android:layout_height="77dp"
-        android:text="left"
+        android:background="@drawable/uflecha"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.862" />
+        app:layout_constraintVertical_bias="0.094" />
 
     <Button
         android:id="@+id/shoot"
         android:layout_width="116dp"
-        android:layout_height="103dp"
-        android:text="shoot"
+        android:layout_height="116dp"
+        android:background="@drawable/shoot"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.144" />
+        app:layout_constraintVertical_bias="0.848" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="90"
+        android:text="Puntos"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="367dp"
+        tools:layout_editor_absoluteY="363dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

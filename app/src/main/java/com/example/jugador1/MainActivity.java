@@ -79,6 +79,9 @@ switch (event.getAction()){
     case MotionEvent.ACTION_UP:
         presionado = false;
         break;
+    case MotionEvent.ACTION_MOVE:
+        Log.e("---->",event.getX()+","+event.getY());
+        break;
 }
 if(presionado == true){
     new Thread(
@@ -87,19 +90,19 @@ if(presionado == true){
                     switch (view.getId()){
                         case R.id.right:
                             Log.e(">>", "right");
-                            x += 10;
+                            x += 5;
                             break;
                         case R.id.up:
                             Log.e("^^", "up");
-                            y -= 10;
+                            y -= 5;
                             break;
                         case R.id.down:
                             Log.e("ll", "down");
-                            y += 10;
+                            y += 5;
                             break;
                         case R.id.left:
                             Log.e("<<", "left");
-                            x -= 10;
+                            x -= 5;
                             break;
 
                     }
@@ -125,12 +128,14 @@ if(presionado == true){
     //movimiento con onclic
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.shoot:
                 Log.e("--", "shoot");
                 Disparo disparo = new Disparo(5, x, y);
                 break;
         }
+
+        
         Coordenada coor = new Coordenada(x,y);
         Gson gson = new Gson();
         String json = gson.toJson(coor);
