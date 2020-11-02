@@ -133,7 +133,7 @@ if(presionado == true){
         switch (view.getId()){
             case R.id.shoot:
                 Log.e("--", "shoot");
-                Disparo disparo = new Disparo(5, x, y);
+                Disparo disparo = new Disparo(5, Dx, Dy);
                 break;
         }
         Disparo shoot = new Disparo(5,Dx,Dy);
