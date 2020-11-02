@@ -19,8 +19,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button down;
     private Button left;
     private TCPSingleton tcp;
-    private int x;
-    private int y;
+    private int Cx;
+    private int Cy;
+    private int Dx;
+    private int Dy;
+    private int vel;
     public String dirIP;
     public boolean presionado;
 
@@ -42,8 +45,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         down = findViewById(R.id.down);
         left = findViewById(R.id.left);
 
-        x = 0;
-        y = 0;
+        Cx = 0;
+        Cy = 0;
+        Dx = 0;
+        Dy = 0;
+        vel = 5;
 
 
         //clicks
@@ -83,23 +89,23 @@ if(presionado == true){
                     switch (view.getId()){
                         case R.id.right:
                             Log.e(">>", "right");
-                            x += 10;
+                            Cx += 10;
                             break;
                         case R.id.up:
                             Log.e("^^", "up");
-                            y -= 10;
+                            Cy -= 10;
                             break;
                         case R.id.down:
                             Log.e("ll", "down");
-                            y += 10;
+                            Cy += 10;
                             break;
                         case R.id.left:
                             Log.e("<<", "left");
-                            x -= 10;
+                            Cx -= 10;
                             break;
 
                     }
-                    Coordenada coor = new Coordenada(x,y);
+                    Coordenada coor = new Coordenada(Cx,Cy);
                     Gson gson = new Gson();
                     String json = gson.toJson(coor);
                     tcp.sendMessage(json);
@@ -124,55 +130,13 @@ if(presionado == true){
         switch (view.getId()){
             case R.id.shoot:
                 Log.e("--", "shoot");
-                Disparo disparo = new Disparo(5, x, y);
                 break;
         }
-        Coordenada coor = new Coordenada(x,y);
+        Disparo shoot = new Disparo(5,Dx,Dy);
         Gson gson = new Gson();
-        String json = gson.toJson(coor);
+        String json = gson.toJson(shoot);
         tcp.sendMessage(json);
-
     }
-/*
-    //movimiento con onclic
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.shoot:
-                Log.e("--", "shoot");
-                Disparo disparo = new Disparo(5, x, y);
-                break;
-
-            case R.id.right:
-                Log.e(">>", "right");
-                x += 10;
-                break;
-
-            case R.id.up:
-                Log.e("^^", "up");
-                y -= 10;
-                break;
-
-            case R.id.down:
-                Log.e("ll", "down");
-                y += 10;
-                break;
-
-            case R.id.left:
-                Log.e("<<", "left");
-                x -= 10;
-                break;
-        }
-        Coordenada coor = new Coordenada(x,y);
-        Gson gson = new Gson();
-        String json = gson.toJson(coor);
-        tcp.sendMessage(json);
-
-    }
-
- */
-
-
 
     @Override
     public void onMessage(String msg) {
