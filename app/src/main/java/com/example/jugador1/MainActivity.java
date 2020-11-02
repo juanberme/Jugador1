@@ -81,6 +81,9 @@ switch (event.getAction()){
     case MotionEvent.ACTION_UP:
         presionado = false;
         break;
+    case MotionEvent.ACTION_MOVE:
+        Log.e("---->",event.getX()+","+event.getY());
+        break;
 }
 if(presionado == true){
     new Thread(
@@ -89,19 +92,19 @@ if(presionado == true){
                     switch (view.getId()){
                         case R.id.right:
                             Log.e(">>", "right");
-                            Cx += 10;
+                            Cx += 5;
                             break;
                         case R.id.up:
                             Log.e("^^", "up");
-                            Cy -= 10;
+                            Cy -= 5;
                             break;
                         case R.id.down:
                             Log.e("ll", "down");
-                            Cy += 10;
+                            Cy += 5;
                             break;
                         case R.id.left:
                             Log.e("<<", "left");
-                            Cx -= 10;
+                            Cx -= 5;
                             break;
 
                     }
@@ -130,13 +133,19 @@ if(presionado == true){
         switch (view.getId()){
             case R.id.shoot:
                 Log.e("--", "shoot");
+                Disparo disparo = new Disparo(5, x, y);
                 break;
         }
         Disparo shoot = new Disparo(5,Dx,Dy);
         Gson gson = new Gson();
         String json = gson.toJson(shoot);
         tcp.sendMessage(json);
+
     }
+
+
+
+
 
     @Override
     public void onMessage(String msg) {
