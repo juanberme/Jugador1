@@ -93,18 +93,23 @@ if(presionado == true){
                         case R.id.right:
                             Log.e(">>", "right");
                             Cx += 5;
+                            Dx += 5;
+
                             break;
                         case R.id.up:
                             Log.e("^^", "up");
                             Cy -= 5;
+                            Dy -= 5;
                             break;
                         case R.id.down:
                             Log.e("ll", "down");
                             Cy += 5;
+                            Dy += 5;
                             break;
                         case R.id.left:
                             Log.e("<<", "left");
                             Cx -= 5;
+                            Dx -= 5;
                             break;
 
                     }
@@ -133,6 +138,7 @@ if(presionado == true){
         switch (view.getId()){
             case R.id.shoot:
                 Log.e("--", "shoot");
+
                 Disparo disparo = new Disparo(5, Dx, Dy);
                 break;
         }
